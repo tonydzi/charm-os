@@ -120,8 +120,8 @@ cofounder, and a fleet of machines that reach consensus with each other and wake
 for money or the irreversible. It was extracted after it survived production, not written as a
 demo — and it runs on its own: nothing here phones home to the rest.
 
-**See how the whole thing fits together → [SYSTEM.md](https://github.com/Palo-Alto-AI-Research-Lab/Palo-Alto-AI-Research-Lab/blob/main/SYSTEM.md)**
+**See how the whole thing fits together → [SYSTEM.md](https://github.com/tonydzi/Palo-Alto-AI-Research-Lab/blob/main/SYSTEM.md)**
 
-Its closest neighbours in the **governance** layer: [`claude-bible`](https://github.com/Palo-Alto-AI-Research-Lab/claude-bible) · [`agent-leash`](https://github.com/Palo-Alto-AI-Research-Lab/agent-leash)
+Its closest neighbours in the **governance** layer: [`claude-bible`](https://github.com/tonydzi/claude-bible) · [`agent-leash`](https://github.com/tonydzi/agent-leash)
 
 <!--ecosystem-map:end-->
