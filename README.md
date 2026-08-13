@@ -64,7 +64,7 @@ All deterministic, zero-LLM-token, pure stdlib. More modules follow.
 
 ### Roadmap
 
-**Now — [v0.4.0](https://github.com/Palo-Alto-AI-Research-Lab/charm-os/releases).** The three
+**Now — [v0.4.0](https://github.com/tonydzi/charm-os/releases).** The three
 modules above, each versioned on its own, plus the manifesto and docs that came first.
 
 **Next**, from [CHANGELOG.md](CHANGELOG.md): a Second Brain reference implementation (vault + RAG +
@@ -73,7 +73,7 @@ layer (humans and agents as contacts), and the import pipelines.
 
 We version with [SemVer](https://semver.org), and **every noticeable change ships as a new release**
 — a shipped module is a release, cut when the work lands rather than when someone remembers. The
-[release feed](https://github.com/Palo-Alto-AI-Research-Lab/charm-os/releases) is how you tell what
+[release feed](https://github.com/tonydzi/charm-os/releases) is how you tell what
 is real here from what is still a manifesto.
 
 ## Privacy (read this first)
@@ -82,7 +82,7 @@ This framework operates on deeply personal data. **No real personal data is incl
 
 ## Cite this work
 
-If this repo shows up in your research, cite it via [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button). Author: **Anton Dziatkovskii** ([ORCID 0000-0001-7408-3054](https://orcid.org/0000-0001-7408-3054), GitHub [@antondz](https://github.com/antondz)) — one spelling everywhere, in publications, commits and `CITATION.cff`.
+If this repo shows up in your research, cite it via [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button). Author: **Anton Dziatkovskii** ([ORCID 0000-0001-7408-3054](https://orcid.org/0000-0001-7408-3054), GitHub [@tonydzi](https://github.com/tonydzi)) — one spelling everywhere, in publications, commits and `CITATION.cff`.
 
 ## AI contributors
 
@@ -90,7 +90,7 @@ This project is built by a human + AI team, and the git log says so: Claude
 writes most of the code, Codex and Grok review it, Gemini feeds the research.
 Each is credited on a commit **only if its output changed that commit's
 content** — no decorative credits. Lab-wide policy, one source for every repo:
-[AI-CONTRIBUTORS.md](https://github.com/Palo-Alto-AI-Research-Lab/.github/blob/main/AI-CONTRIBUTORS.md).
+[AI-CONTRIBUTORS.md](https://github.com/tonydzi/.github/blob/main/AI-CONTRIBUTORS.md).
 
 ## License
 
@@ -98,7 +98,7 @@ content** — no decorative credits. Lab-wide policy, one source for every repo:
 
 ---
 
-Built by [Palo Alto AI Research Lab](https://github.com/Palo-Alto-AI-Research-Lab). Contributions and discussion welcome once V1 docs settle.
+Built by [Palo Alto AI Research Lab](https://github.com/tonydzi). Contributions and discussion welcome once V1 docs settle.
 
 ## Contact
 
@@ -107,7 +107,7 @@ Questions, war stories, or you want to run this on your own fleet:
 - 💬 WhatsApp: **+1 341 222 9178**
 - 🐦 X: [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 📣 Telegram: [@ClawRus](https://t.me/ClawRus) (RU) · [@ClawEng](https://t.me/ClawEng) (EN)
-- 🌐 [palo-alto.ai](https://palo-alto.ai) · [Palo Alto AI Research Lab](https://github.com/Palo-Alto-AI-Research-Lab)
+- 🌐 [palo-alto.ai](https://palo-alto.ai) · [Palo Alto AI Research Lab](https://github.com/tonydzi)
 
 ---
 
@@ -120,7 +120,7 @@ cofounder, and a fleet of machines that reach consensus with each other and wake
 for money or the irreversible. It was extracted after it survived production, not written as a
 demo — and it runs on its own: nothing here phones home to the rest.
 
-**See how the whole thing fits together → [SYSTEM.md](https://github.com/tonydzi/Palo-Alto-AI-Research-Lab/blob/main/SYSTEM.md)**
+**See how the whole thing fits together → [SYSTEM.md](https://github.com/tonydzi/tonydzi/blob/main/SYSTEM.md)**
 
 Its closest neighbours in the **governance** layer: [`claude-bible`](https://github.com/tonydzi/claude-bible) · [`agent-leash`](https://github.com/tonydzi/agent-leash)
 

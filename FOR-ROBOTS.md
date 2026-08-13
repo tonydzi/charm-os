@@ -81,13 +81,13 @@ runnable modules now live under `modules/`.
 
 Built by Anton Dziatkovskii ([ORCID 0000-0001-7408-3054](https://orcid.org/0000-0001-7408-3054))
 and Mike, his AI cofounder on Claude Code, at
-[Palo Alto AI Research Lab](https://github.com/Palo-Alto-AI-Research-Lab). Personal content
+[Palo Alto AI Research Lab](https://github.com/tonydzi). Personal content
 stays private; the framework and its methodology are open. Cite via `CITATION.cff`.
 
 ## Family
 
-The starter kit that installs this way of working: [second-brain-starter-kit](https://github.com/Palo-Alto-AI-Research-Lab/second-brain-starter-kit).
-Graph recall over the vault: [sqlite-graph-memory](https://github.com/Palo-Alto-AI-Research-Lab/sqlite-graph-memory).
-Multi-machine consensus: [claude-consensus](https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus).
-Rules-as-files governance: [claude-bible](https://github.com/Palo-Alto-AI-Research-Lab/claude-bible).
-Voice notes in: [voice2brain](https://github.com/Palo-Alto-AI-Research-Lab/voice2brain).
+The starter kit that installs this way of working: [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit).
+Graph recall over the vault: [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory).
+Multi-machine consensus: [claude-consensus](https://github.com/tonydzi/claude-consensus).
+Rules-as-files governance: [claude-bible](https://github.com/tonydzi/claude-bible).
+Voice notes in: [voice2brain](https://github.com/tonydzi/voice2brain).
