@@ -84,7 +84,7 @@ can gate on it.
 3. Run `eval.py`. Disagree with a rule? Edit `invariants.py` and re-run. That is the intended way to
    argue with this benchmark.
 
-Traces in the format produced by [claude-consensus](https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus)
+Traces in the format produced by [claude-consensus](https://github.com/tonydzi/claude-consensus)
 work out of the box - `sanitize.py` is the reference adapter.
 
 ## Privacy: how real logs become public fixtures
