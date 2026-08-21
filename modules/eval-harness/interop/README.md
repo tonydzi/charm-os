@@ -49,6 +49,16 @@ Two things found in their code while doing this, reported here rather than as dr
    so a caller passing it silently gets 100 anyway
    (`invariant/analyzer/runtime/evaluation_context.py:25-30`).
 
+One trap worth flagging for anyone else writing rules in that language, because we fell into it.
+"This commit was approved" has to be written as an absence check, `count(max=0)` over the
+approving pattern - and the block inside a quantifier binds its own fresh variables. Write it the
+obvious way and the rule silently asks *"does any approved commit exist anywhere in this trace"*
+instead of *"was this commit approved"*, so a trace with an unapproved commit followed by an
+approved one comes back clean. Our first draft did exactly that; it agreed with our harness on the
+fixture (one commit per proposal) and would have been wrong the moment a proposal committed twice.
+The fix is one line - `c2.id == c.id` inside the inner block - and the "two commits, first
+unapproved" control keeps it fixed. An adversarial review found it, not our green run.
+
 Where Invariant is plainly ahead of us, and we are not going to pretend otherwise: it enforces at
 runtime as an LLM/MCP proxy instead of scoring after the fact; it ships content detectors we have
 none of (PII, secrets, prompt injection, moderation, code, copyright, OCR); it localises a

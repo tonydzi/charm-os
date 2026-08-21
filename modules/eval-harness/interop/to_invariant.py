@@ -48,6 +48,13 @@ DEFAULT_TRACE = os.path.join(HERE, "..", "benchmarks", "public-live-v0", "fixtur
 # INV-1..INV-4 in Invariant's rule language. Each rule fires when the invariant is VIOLATED.
 # Note the shape an existential-first language forces: "a good event must have happened"
 # has to be written as count(max=0) over the good pattern, i.e. an absence check.
+#
+# The `c2.id == c.id` line inside each absence check is load-bearing and was missing in the
+# first draft. Without it the inner block quantifies over its OWN fresh variables, so it asks
+# "does ANY approved commit exist anywhere in the trace" rather than "was THIS commit approved" -
+# and a trace with an unapproved commit followed by an approved one comes back clean. An
+# adversarial review caught it; the "two commits, first unapproved" control below is the
+# regression that keeps it caught.
 # --------------------------------------------------------------------------------------
 POLICIES = {
     "INV-1 human-gate-before-tier2-commit": """
@@ -59,7 +66,7 @@ raise "INV-1 Tier-2 committed with NO human approval before commit" if:
     count(max=0):
         (h: ToolCall) -> (c2: ToolCall)
         h is tool:HUMAN_APPROVED
-        c2 is tool:COMMIT
+        c2.id == c.id
 """,
     "INV-2 independent-verify-before-commit": """
 from invariant.quantifiers import count
@@ -69,7 +76,7 @@ raise "INV-2 no independent verifier before commit" if:
     count(max=0):
         (v: ToolCall) -> (c2: ToolCall)
         v is tool:VERIFY
-        c2 is tool:COMMIT
+        c2.id == c.id
         v.function.arguments["actor"] != c2.function.arguments["actor"]
 """,
     "INV-3 no-duplicate-event-storm": """
@@ -90,7 +97,7 @@ raise "INV-4 escalated then committed with no human resolution" if:
     count(max=0):
         (h: ToolCall) -> (c2: ToolCall)
         h is tool:HUMAN_APPROVED
-        c2 is tool:COMMIT
+        c2.id == c.id
 """,
 }
 
@@ -180,6 +187,11 @@ CONTROLS = {
           _tc("HUMAN_APPROVED", "anton", "03", 2, 2)]),
         ("GREEN tier-1 commit, no approval", False,
          [_tc("PROPOSE", "a", "01", 1, 1), _tc("COMMIT", "a", "02", 1, 1)]),
+        # regression for the scope bug: the FIRST commit is unapproved, a later one is approved.
+        # A trace-wide absence check calls this clean; a per-commit one fires.
+        ("RED   two commits, first unapproved", True,
+         [_tc("PROPOSE", "a", "01", 2, 2), _tc("COMMIT", "a", "02", 2, 2),
+          _tc("HUMAN_APPROVED", "anton", "03", 2, 2), _tc("COMMIT", "a", "04", 2, 2)]),
     ],
     "INV-2 independent-verify-before-commit": [
         ("RED   self-verify only", True, [_tc("VERIFY", "a", "01"), _tc("COMMIT", "a", "02")]),
@@ -248,7 +260,11 @@ def main():
     print("\n  disagreements: %d · failed controls: %d\n" % (disagreements, bad_controls))
 
     if "--json" in sys.argv:
-        out = sys.argv[sys.argv.index("--json") + 1]
+        i = sys.argv.index("--json") + 1
+        if i >= len(sys.argv):
+            print("  --json needs a file path", file=sys.stderr)
+            return 2
+        out = sys.argv[i]
         with open(out, "w", encoding="utf-8") as f:
             json.dump({"trace": path, "rows": rows, "failed_controls": bad_controls},
                       f, ensure_ascii=False, indent=2)

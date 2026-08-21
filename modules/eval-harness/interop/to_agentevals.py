@@ -91,6 +91,9 @@ def main():
                                                tool_args_match_mode="ignore") for m in MODES}
     path = next((a for a in sys.argv[1:] if not a.startswith("--")), DEFAULT_TRACE)
     by = load(path)
+    if not by:
+        print("  no readable events in %s - empty or malformed trace" % path, file=sys.stderr)
+        return 2
 
     # the reference is the proposal our own harness scores clean - the closest thing a live
     # fleet has to an "ideal trajectory", since nobody hand-writes reference runs for it.
