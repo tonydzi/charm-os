@@ -88,6 +88,6 @@ stays private; the framework and its methodology are open. Cite via `CITATION.cf
 
 The starter kit that installs this way of working: [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit).
 Graph recall over the vault: [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory).
-Multi-machine consensus: [claude-consensus](https://github.com/tonydzi/claude-consensus).
+Multi-machine consensus: [claw-consensus](https://github.com/tonydzi/claw-consensus).
 Rules-as-files governance: [claude-bible](https://github.com/tonydzi/claude-bible).
 Voice notes in: [voice2brain](https://github.com/tonydzi/voice2brain).
