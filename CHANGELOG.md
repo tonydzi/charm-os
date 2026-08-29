@@ -6,6 +6,23 @@
 - C(H+A)RM relationship layer (humans + agents as contacts).
 - Import pipelines and skills library.
 
+## [0.5.0] - 2026-08-25
+
+### Added
+- `modules/eval-harness/` measured against **Invariant Guardrails** and **AgentEvals** — the
+  harness now has external reference points instead of only its own word.
+
+### Changed
+- interop: absence checks are scoped to the commit under test, so a missing capability is no
+  longer blamed on the whole tree.
+- i18n: comments, docstrings and docs are English.
+- The flagship module was renamed `claude-consensus` -> `claw-consensus`; living links updated.
+- Link sweep after the move to the `tonydzi` account.
+
+*Written into this file on 2026-08-29. The release was cut on 25 Aug by the first run of the
+weekly release pass and the changelog was not updated with it — run #2 found the same gap in
+three repositories and now updates the changelog in the same commit as the release.*
+
 ## [0.4.0] - 2026-08-04
 
 ### Added
