@@ -6,6 +6,24 @@
 - C(H+A)RM relationship layer (humans + agents as contacts).
 - Import pipelines and skills library.
 
+## [0.5.1] - 2026-10-02
+
+### Added
+- **"Contributors welcome, and here is what we are missing"** in the README: two scoped issues that
+  are free to take, a safety invariant for `modules/eval-harness/` that is not already on our list,
+  and a `turnstate` ledger adapter for a harness that is not Claude Code. Comment "claiming this",
+  no permission needed, yours for seven days. No CLA and no copyright assignment; every issue and PR
+  answered within 48 hours, refusals included.
+- **A "read this with AI" entry point**: one click opens the repo in Codex, ChatGPT or Claude with a
+  prompt that asks the agent to work out what the framework solves and apply it to the reader's own
+  setup, with the raw prompt provided for other models.
+
+### Changed
+- The README places this repo inside the governance layer of the wider system, naming its closest
+  neighbours, and the docs point at `SYSTEM.md` as the map.
+- `0.5.0` was released on 25 August and never written down here; its entry below was backfilled on
+  26 September and is marked as recorded after the fact rather than dated to look contemporaneous.
+
 ## [0.5.0] - 2026-08-25
 
 ### Added
