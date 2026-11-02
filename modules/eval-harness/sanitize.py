@@ -66,7 +66,7 @@ def main():
     # ignore tg-* mirror shards (duplicate the primary rail) so we don't double-count events
     shards = [s for s in shards if not os.path.basename(s).startswith("log-tg-")]
     seen_event_ids = set()
-    rows, touched = [], 0
+    rows, touched, bad = [], 0, 0
     for s in shards:
         for ln in open(s, encoding="utf-8"):
             ln = ln.strip()
@@ -75,6 +75,7 @@ def main():
             try:
                 e = json.loads(ln)
             except Exception:
+                bad += 1          # e.g. a half-written last line: count it, never drop silently
                 continue
             eid = e.get("event_id")
             if eid and eid in seen_event_ids:
@@ -93,7 +94,7 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print(f"[sanitize] shards={len(shards)} events={len(rows)} scrubbed={touched} -> {out_path}")
+    print(f"[sanitize] shards={len(shards)} events={len(rows)} scrubbed={touched} malformed={bad} -> {out_path}")
 
 
 if __name__ == "__main__":

@@ -197,6 +197,11 @@ def backfill(con):
                     "ON CONFLICT(session_id) DO UPDATE SET scanned_end=excluded.scanned_end,"
                     "ts=excluded.ts", (sid, fsize, time.strftime("%Y-%m-%d %H:%M:%S")))
         con.commit()
+        # hand the hook's per-session offset forward past what we just ingested, so a gap the
+        # hook skipped (tail over MAX_NEW_BYTES) is not skipped again on every later turn
+        end = start + len(raw)
+        if end > _h.read_offset(sid, fsize):
+            _h.write_offset(sid, end)
     return added, files_seen
 
 

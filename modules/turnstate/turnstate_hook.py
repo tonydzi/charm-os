@@ -170,7 +170,9 @@ def main():
     fsize = os.path.getsize(tpath)
     start = read_offset(sid, fsize)
     if fsize - start > MAX_NEW_BYTES:   # huge gap (e.g. first turn of a resumed session)
-        write_offset(sid, fsize)        # -> let the backfill handle it, just advance
+        # Leave the offset where it is and write nothing: the backfill starts at the last
+        # recorded byte_end and ingests the whole gap, then moves this offset itself. Advancing
+        # here made the next row's byte_end jump past the gap, so the backfill never saw it.
         return
     if fsize <= start:                  # nothing new
         return

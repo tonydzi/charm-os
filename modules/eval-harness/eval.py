@@ -31,6 +31,11 @@ def load(path):
             except json.JSONDecodeError:
                 skipped += 1
                 continue
+            # the invariants index e["type"] / e["ts"] directly: a parseable line that lacks them
+            # (or is not an object) is skipped and counted here instead of crashing a check later
+            if not isinstance(e, dict) or "type" not in e or "ts" not in e:
+                skipped += 1
+                continue
             by_prop[e.get("proposal_id")].append(e)
             n += 1
     return by_prop, n, skipped
