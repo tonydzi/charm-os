@@ -199,7 +199,10 @@ def backfill(con):
         con.commit()
         # hand the hook's per-session offset forward past what we just ingested, so a gap the
         # hook skipped (tail over MAX_NEW_BYTES) is not skipped again on every later turn
-        end = start + len(raw)
+        # only through the last COMPLETE record: a half-written trailing line must stay
+        # visible to the hook, or its tail would be read as a fragment and the event lost
+        nl = raw.rfind(b"\n")
+        end = start + (nl + 1 if nl >= 0 else 0)
         if end > _h.read_offset(sid, fsize):
             _h.write_offset(sid, end)
     return added, files_seen

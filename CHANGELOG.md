@@ -6,6 +6,16 @@
 - C(H+A)RM relationship layer (humans + agents as contacts).
 - Import pipelines and skills library.
 
+## [0.5.2] - 2026-11-06
+
+### Fixed
+- **turnstate: a skipped transcript tail is backfilled.** When the hook skipped a long tail, it
+  stayed skipped on every later turn; the backfill now ingests it and moves the hook offset
+  forward, but only up to the last complete record, so a half-written line is never lost.
+- **eval-harness degrades visibly.** When a check cannot run, the report says so instead of
+  looking like a pass (`test_degrade_visibly.py`).
+- Docs: every piece points at the system map (`SYSTEM.md`); README footer wording corrected.
+
 ## [0.5.1] - 2026-10-02
 
 ### Added
