@@ -1,4 +1,62 @@
-# CharmOS · {C(H+A)RM}
+# charm-os
+
+An open-source toolkit that keeps your notes, your contacts and your AI agents in one local place, and gives you a loop for making decisions: recall what you know, research the gaps, then decide.
+
+**Who it's for:** founders, researchers and engineers who want a memory system they own and can repair themselves.
+**What you get:** three small Python tools: a memory ledger, a decision-loop command (`rdr`), and a scorer that checks whether your agents broke safety rules.
+
+## Quick start
+1. Install Python 3 (the tools use only the standard library).
+2. Run `git clone https://github.com/tonydzi/charm-os` and `cd charm-os/modules/eval-harness`.
+3. Run `python eval.py benchmarks/public-live-v0/fixture.jsonl`.
+4. Try the decision loop: `python ../rdr/rdr.py memo "my question"`.
+
+**Done when:** step 3 prints a table of safety checks ending in `TOTAL FAILED CHECKS: 3`, and step 4 creates a memo file in `./decisions`.
+
+> Want an AI agent to do it for you? Paste this to Claude Code / Codex / Cursor:
+> "Read the 'For AI agents' section of https://github.com/tonydzi/charm-os and set it up for me."
+
+## For AI agents
+
+### Preconditions
+- Python 3, standard library only. No `pip install` step exists. Use `python` on Windows, `python3` elsewhere.
+- No accounts or keys. Nothing leaves the machine.
+- Read `AGENTS.md` first. Key rules: examples must stay fictional; do not weaken `sanitize.py`; do not add or remove scoring invariants without a human; do not change the expected score to make a failing run pass.
+- Ask the human: which module do they want (eval-harness, rdr, turnstate)? For rdr and turnstate, where should data live?
+
+### Install
+```bash
+git clone https://github.com/tonydzi/charm-os
+cd charm-os
+```
+There is no package to install; each module under `modules/` is run as a script.
+
+### Configure
+All optional environment variables:
+- `CHARMOS_TURNSTATE_DB` (default `~/.charmos/turnstate/turnstate.db`): ledger used by `rdr recall` and the turnstate hook.
+- `CHARMOS_NOTES_DIR` (unset): extra folder of `.md`/`.txt` notes that `rdr recall` reads recursively. Ask the human before pointing it anywhere.
+- `CHARMOS_MEMO_DIR` (default `./decisions`): where `rdr memo` writes.
+- `CHARMOS_TRANSCRIPTS_GLOB` (default `~/.claude/projects/*/*.jsonl`): where turnstate backfill finds session transcripts.
+The turnstate hook is registered as a Claude Code `Stop` hook; see `modules/turnstate/README.md`. Ask the human before editing their `settings.json`.
+
+### Verify
+```bash
+cd modules/eval-harness
+python eval.py benchmarks/public-live-v0/fixture.jsonl        # prints a scorecard; exit code 3 (the number of failed checks)
+python eval.py benchmarks/consensus-safety-v0/fixture.jsonl   # 64 proposals, 317 events; exit code 42
+python test_degrade_visibly.py                                # ends with OK, exit 0
+```
+The exit code of `eval.py` is the number of failed checks, and these two fixtures fail on purpose, so 3 and 42 are the expected results. Do not "fix" them. Turnstate test: `cd modules/turnstate && python test_gap_backfill.py` ends with `OK`.
+
+### Uninstall / rollback
+Delete the cloned folder. If you ran `rdr memo`, also delete the `decisions/` folder it created, and `~/.charmos/` if turnstate was used (ask the human first).
+
+### Rules for the agent
+- Never commit a fixture or trace that has not gone through `sanitize.py`; never invent real people's names.
+- Point `CHARMOS_NOTES_DIR` and `CHARMOS_MEMO_DIR` only at folders the human named. `rdr memo` never overwrites an existing memo; keep it that way.
+- License is Apache-2.0, not MIT.
+
+## Details
 
 **The first open-source framework that manages both your human contacts AND your AI agents as first-class relationships, on top of a personal "second brain", driven by one decision loop: RDR.**
 
