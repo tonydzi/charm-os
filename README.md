@@ -11,7 +11,7 @@ An open-source toolkit that keeps your notes, your contacts and your AI agents i
 3. Run `python eval.py benchmarks/public-live-v0/fixture.jsonl`.
 4. Try the decision loop: `python ../rdr/rdr.py memo "my question"`.
 
-**Done when:** step 3 prints a table of safety checks ending in `TOTAL FAILED CHECKS: 3`, and step 4 creates a memo file in `./decisions`.
+**Done when:** step 3 prints a table of safety checks, a line `TOTAL FAILED CHECKS: 3` and, below it, the three failures it found (`only self-verified - no independent verifier before commit`). Seeing failures here is the success: the sample file is built to fail on purpose, to show the scorer catches it. Step 4 prints `memo scaffolded -> ...decision-my-question.md` and creates that file in `./decisions` (inside the folder you are in).
 
 > Want an AI agent to do it for you? Paste this to Claude Code / Codex / Cursor:
 > "Read the 'For AI agents' section of https://github.com/tonydzi/charm-os and set it up for me."
@@ -46,10 +46,15 @@ python eval.py benchmarks/public-live-v0/fixture.jsonl        # prints a scoreca
 python eval.py benchmarks/consensus-safety-v0/fixture.jsonl   # 64 proposals, 317 events; exit code 42
 python test_degrade_visibly.py                                # ends with OK, exit 0
 ```
-The exit code of `eval.py` is the number of failed checks, and these two fixtures fail on purpose, so 3 and 42 are the expected results. Do not "fix" them. Turnstate test: `cd modules/turnstate && python test_gap_backfill.py` ends with `OK`.
+The exit code of `eval.py` is the number of failed checks, and these two fixtures fail on purpose, so 3 and 42 are the expected results. Do not "fix" them. Turnstate test: `cd modules/turnstate && python test_gap_backfill.py` ends with `OK` (about 10 s). `eval.py` prints `TOTAL FAILED CHECKS: N` and then lists the failing proposals below it. A result of 0 on these fixtures, or a different number, means the scorer or the fixture was changed.
+`rdr` is not exercised by the commands above. Check it separately, writing to a scratch folder so nothing is left behind:
+```bash
+CHARMOS_MEMO_DIR=/tmp/charm-memo python modules/rdr/rdr.py memo "verify" ; ls /tmp/charm-memo
+```
+PowerShell: `$env:CHARMOS_MEMO_DIR="$env:TEMP\charm-memo"; python modules\rdr\rdr.py memo "verify"; dir $env:TEMP\charm-memo`. Expected: `memo scaffolded -> .../decision-verify.md`; running it again prints `memo: already exists, not overwriting`. `rdr recall "x"` reads the turnstate ledger and prints nothing useful until one exists (`~/.charmos/turnstate/turnstate.db`), so an empty recall result is not a failure.
 
 ### Uninstall / rollback
-Delete the cloned folder. If you ran `rdr memo`, also delete the `decisions/` folder it created, and `~/.charmos/` if turnstate was used (ask the human first).
+Delete the cloned folder. If you ran `rdr memo`, also delete the `decisions/` folder it created (or the scratch folder from Verify), and `~/.charmos/` if turnstate was used (ask the human first).
 
 ### Rules for the agent
 - Never commit a fixture or trace that has not gone through `sanitize.py`; never invent real people's names.
