@@ -56,8 +56,8 @@ companion `modules/turnstate/turnstate_backfill.py` rebuilds the ledger from tra
 
 ## Layout
 
-`plugin/modules` is a symlink to the repository's `modules/` folder, so the hook and skills run
-the same code that is documented and tested there. Claude Code follows the symlink when it copies
-the plugin into its cache.
+The repository root is the plugin: `.claude-plugin/plugin.json`, `hooks/hooks.json` and `skills/`
+sit next to `modules/`, so the hook runs the same `modules/turnstate/turnstate_hook.py` that is
+documented and tested there. No symlinks, nothing outside the plugin root.
 
 License: Apache-2.0. Privacy: [PRIVACY.md](https://github.com/tonydzi/charm-os/blob/main/PRIVACY.md).

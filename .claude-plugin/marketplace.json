@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "charm-os",
-      "source": "./plugin",
+      "source": "./",
       "description": "TurnState Stop hook that writes your prompts into a local SQLite database, plus skills rdr and agent-trace-eval. Python 3, no network.",
       "version": "0.5.2",
       "license": "Apache-2.0",

@@ -25,6 +25,13 @@ An open-source toolkit that keeps your notes, your contacts and your AI agents i
 - Ask the human: which module do they want (eval-harness, rdr, turnstate)? For rdr and turnstate, where should data live?
 
 ### Install
+
+As a Claude Code plugin (TurnState hook + rdr + agent-trace-eval), see [docs/PLUGIN.md](docs/PLUGIN.md):
+
+```
+/plugin marketplace add tonydzi/charm-os
+/plugin install charm-os@charm-os
+```
 ```bash
 git clone https://github.com/tonydzi/charm-os
 cd charm-os
