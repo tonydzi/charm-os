@@ -22,6 +22,8 @@ containing:
 - the assistant's reply text (first 1200 characters),
 - files written or edited, tools used, shell commands run (each command clipped to 200 characters),
 - lines that look like decisions or TODOs,
+- the working directory (cwd) and its folder name, used as the project name (a full path can
+  contain your OS username or a client or project name),
 - the session id and a pointer to the transcript file.
 
 If that folder cannot be created, the database falls back to the system temp folder. The hook also

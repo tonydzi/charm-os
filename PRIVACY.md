@@ -7,8 +7,9 @@ The CharmOS plugin sends no data anywhere. It makes no network requests and has 
 The TurnState Stop hook writes your prompts into a local SQLite database. After each turn it
 stores, on your own machine, at `~/.charmos/turnstate/turnstate.db` (or `CHARMOS_TURNSTATE_DB`):
 your prompt (clipped to 500 characters), the assistant's reply text (clipped to 1200 characters),
-names of files written or edited, tools used, shell commands run, decision-like lines, the session
-id and the transcript path. Anything you type, including secrets in a prompt or command, can be
+names of files written or edited, tools used, shell commands run, decision-like lines, the working
+directory (cwd) and its folder name (stored as the project name), the session id and the transcript
+path. A full working-directory path can contain your OS username or a client or project name. Anything you type, including secrets in a prompt or command, can be
 stored there. If that folder cannot be created, the database is placed in the system temp folder.
 The hook also keeps one per-session byte-offset file (a number only) in the system temp folder.
 
