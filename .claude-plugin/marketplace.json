@@ -1,0 +1,21 @@
+{
+  "name": "charm-os",
+  "owner": {
+    "name": "Anton Dziatkovskii",
+    "url": "https://github.com/tonydzi"
+  },
+  "metadata": {
+    "description": "CharmOS modules for Claude Code: TurnState memory hook, RDR decision loop, agent trace eval.",
+    "version": "0.5.2"
+  },
+  "plugins": [
+    {
+      "name": "charm-os",
+      "source": "./plugin",
+      "description": "TurnState Stop hook that writes your prompts into a local SQLite database, plus skills rdr and agent-trace-eval. Python 3, no network.",
+      "version": "0.5.2",
+      "license": "Apache-2.0",
+      "category": "productivity"
+    }
+  ]
+}

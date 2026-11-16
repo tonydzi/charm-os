@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "charm-os",
+  "displayName": "CharmOS",
+  "version": "0.5.2",
+  "description": "TurnState Stop hook that writes each turn (your prompt, a clipped reply summary, files, tools, shell commands) into a local SQLite database, plus two skills: rdr (recall, research prompt, decision memo) and agent-trace-eval (score multi-agent JSONL traces against safety invariants). Requires python3. Nothing is sent over the network.",
+  "author": {
+    "name": "Anton Dziatkovskii",
+    "url": "https://github.com/tonydzi"
+  },
+  "homepage": "https://github.com/tonydzi/charm-os",
+  "repository": "https://github.com/tonydzi/charm-os",
+  "license": "Apache-2.0",
+  "keywords": [
+    "memory",
+    "agent-memory",
+    "hooks",
+    "sqlite",
+    "decision-making",
+    "multi-agent",
+    "evaluation"
+  ],
+  "privacyPolicyUrl": "https://github.com/tonydzi/charm-os/blob/main/PRIVACY.md",
+  "skills": "./skills/"
+}

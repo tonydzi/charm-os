@@ -1,0 +1,16 @@
+{
+  "description": "TurnState: after each turn, append one row (prompt, clipped reply summary, files, tools, shell commands, decision lines) to a local SQLite ledger. Never prints, never blocks, no network.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/modules/turnstate/turnstate_hook.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
